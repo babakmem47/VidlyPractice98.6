@@ -1,0 +1,45 @@
+﻿@*@model VidlyPractice.Models.Movie
+*@
+@model IEnumerable<VidlyPractice.Models.Movie>
+
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2>Movies</h2>
+<p></p>
+<br/>
+@*<p>@Model.Name</p>*@
+
+@*<ul>
+    @foreach (var movie in Model)
+    {
+        <li>
+            @movie.Name
+        </li>
+    }
+</ul>*@
+
+@{
+    if (Model == null) 
+    {
+        <p>Model is null</p>
+        return;
+    }
+
+    if (!Model.Any())
+    {
+        <p>Model is not Any!</p>
+    }
+}
+<table class="table-bordered table-condensed table-hover" width="100%">
+    <tr><th>Movie</th></tr>
+    @foreach (var movie in Model)
+    {
+        <tr>
+            <td>
+                @movie.Name
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<VidlyPractice.Models.Customer>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+<br/>
+@{
+    if (!Model.Any())
+    {
+        <text>We dont have any customers</text>
+        return;
+    }
+}
+
+<table class="table table-hover table-bordered table-striped" width="100%">
+    <tr>
+        <th>Customers</th>
+    </tr>
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(customer.Name, "Detail", "Customer", new { id = customer.Id }, null)
+            </td>
+            @*<td>@customer.Name</td>*@
+        </tr>
+    }
+</table>
