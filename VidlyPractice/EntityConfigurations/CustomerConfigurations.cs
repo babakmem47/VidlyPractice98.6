@@ -12,6 +12,9 @@ namespace VidlyPractice.EntityConfigurations
             Property(c => c.Name)
                 .HasMaxLength(50)
                 .IsRequired();
+
+            Property(c => c.BirthDate)
+                .IsOptional();
         }
     }
 }

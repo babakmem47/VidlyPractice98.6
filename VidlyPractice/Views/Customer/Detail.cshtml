@@ -1,8 +1,19 @@
-﻿@model VidlyPractice.Models.Customer
+﻿@using Microsoft.Ajax.Utilities
+@model VidlyPractice.Models.Customer
 
 @{
     ViewBag.Title = "title";
 }
 
-<h2></h2>
-@Model.Name
+<h2>@Model.Name</h2>
+<br />
+<ul>
+    <li>Membership Type: @Model.MembershipType.Name</li>
+    @{
+        if (Model.BirthDate != null)
+        {
+            <li>Date of Birth : @Model.BirthDate.Value.ToString("yyyy MMMM dd");</li>
+        }
+    }
+</ul>
+

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Services.Description;
 using VidlyPractice.Models;
+using System.Data.Entity;
 
 namespace VidlyPractice.Controllers
 {
@@ -23,6 +24,10 @@ namespace VidlyPractice.Controllers
 
         public ActionResult Index()
         {
+            var customers = _context.Customer.Include(c => c.MembershipType).ToList();
+
+            return View(customers);
+
             //var customer = new List<Customer>()
             //{
             //    new Customer { Id = 0, Name = "Mahdokht Sobhanipoor"},
@@ -32,10 +37,6 @@ namespace VidlyPractice.Controllers
             //};
 
             //return View(customer);
-
-            var customers = _context.Customer.ToList();
-
-            return View(customers);
         }
 
         [Route("Customer/Detail/{customerId}")]
@@ -45,7 +46,9 @@ namespace VidlyPractice.Controllers
             {
                 return HttpNotFound();
             }
-            var customer = _context.Customer.SingleOrDefault(c => c.Id == customerId);
+            var customer = _context.Customer
+                .Include(c => c.MembershipType)
+                .SingleOrDefault(c => c.Id == customerId);
             return View(customer);
         }
     }

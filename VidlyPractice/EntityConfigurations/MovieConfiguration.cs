@@ -16,6 +16,15 @@ namespace VidlyPractice.EntityConfigurations
             Property(m => m.Name)
                 .HasMaxLength(70)
                 .IsRequired();
+
+            Property(m => m.DateAdded)
+                .IsOptional();
+
+            Property(m => m.NumberInStock)
+                .IsOptional();
+
+            Property(m => m.ReleaseDate)
+                .IsOptional();
         }
     }
 }

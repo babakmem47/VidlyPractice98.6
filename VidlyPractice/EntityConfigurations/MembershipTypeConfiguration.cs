@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Threading;
-using System.Web;
-using System.Web.Security;
+﻿using System.Data.Entity.ModelConfiguration;
 using VidlyPractice.Models;
 
 namespace VidlyPractice.EntityConfigurations
@@ -23,6 +17,9 @@ namespace VidlyPractice.EntityConfigurations
 
             Property(m => m.DiscountRate)
                 .IsRequired();
+
+            Property(m => m.Name)
+                .HasMaxLength(50);
         }
     }
 }

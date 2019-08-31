@@ -1,27 +1,12 @@
-﻿@*@model VidlyPractice.Models.Movie
-*@
-@model IEnumerable<VidlyPractice.Models.Movie>
-
+﻿@model IEnumerable<VidlyPractice.Models.Movie>
 @{
-    ViewBag.Title = "Movies";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Movies</h2>
-<p></p>
-<br/>
-@*<p>@Model.Name</p>*@
-
-@*<ul>
-    @foreach (var movie in Model)
-    {
-        <li>
-            @movie.Name
-        </li>
-    }
-</ul>*@
-
+<h2>Movie</h2>
 @{
-    if (Model == null) 
+    if (Model == null)
     {
         <p>Model is null</p>
         return;
@@ -29,17 +14,26 @@
 
     if (!Model.Any())
     {
-        <p>Model is not Any!</p>
+        <p>There is no movie available to show</p>
+        return;
     }
 }
-<table class="table-bordered table-condensed table-hover" width="100%">
-    <tr><th>Movie</th></tr>
+
+<table class="table table-bordered table-striped table-condensed table-responsive">
+    <thead>
+    <tr>
+        <td>Movie</td>
+        <td>Genre</td>
+    </tr>
+    </thead>
+       
+    <tbody>
     @foreach (var movie in Model)
     {
         <tr>
-            <td>
-                @movie.Name
-            </td>
+            <td>@Html.ActionLink(movie.Name, "Detail", "Movie", new { id = movie.Id }, null)</td>
+            <td>@movie.Genre.Name</td>
         </tr>
     }
+    </tbody>
 </table>
