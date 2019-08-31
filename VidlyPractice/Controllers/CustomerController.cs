@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Services.Description;
 using VidlyPractice.Models;
-using System.Data.Entity;
 
 namespace VidlyPractice.Controllers
 {
@@ -50,6 +48,11 @@ namespace VidlyPractice.Controllers
                 .Include(c => c.MembershipType)
                 .SingleOrDefault(c => c.Id == customerId);
             return View(customer);
+        }
+
+        public ActionResult New()
+        {
+            return View();
         }
     }
 }

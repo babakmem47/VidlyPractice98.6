@@ -130,3 +130,9 @@ D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.A
 D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddGenre.resources
 D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.PopulateGenre.resources
 D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddReleaseDateDateAddedAndNumberInStockToMovie.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddNameToMembershipType.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.PopulateNameInMembershipType.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddBirthDateToCustomer.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddGenre.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.PopulateGenre.resources
+E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddReleaseDateDateAddedAndNumberInStockToMovie.resources
