@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using VidlyPractice.Models;
+using VidlyPractice.ViewModels;
 
 namespace VidlyPractice.Controllers
 {
@@ -37,22 +38,62 @@ namespace VidlyPractice.Controllers
             //return View(customer);
         }
 
-        [Route("Customer/Detail/{customerId}")]
-        public ActionResult Detail(int customerId)
+        [Route("Customer/Edit/{customerId}")]
+        public ActionResult Edit(int customerId)
         {
             if (customerId == 0)
             {
                 return HttpNotFound();
             }
-            var customer = _context.Customer
-                .Include(c => c.MembershipType)
-                .SingleOrDefault(c => c.Id == customerId);
-            return View(customer);
+            var customer = _context.Customer.Single(c => c.Id == customerId);
+
+            var viewModel = new CustomerFormViewModel()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter,
+                BirthDate = customer.BirthDate,
+                MembershipTypeId = customer.MembershipTypeId,
+                MembershipTypes = _context.MembershipType.ToList()
+
+            };
+            return View("CustomerForm", viewModel);
         }
 
         public ActionResult New()
         {
-            return View();
+            var viewModel = new CustomerFormViewModel()
+            {
+                MembershipTypes = _context.MembershipType.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)                   // customer is new
+            {
+                _context.Customer.Add(customer);                
+            }
+            else                                    // edit an existing customer
+            {
+                var customerInDb = _context.Customer.SingleOrDefault(c => c.Id == customer.Id);
+                if (customerInDb == null)
+                {
+                    return HttpNotFound();
+                }
+
+                customerInDb.Name = customer.Name;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+                customerInDb.BirthDate = customer.BirthDate;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Customer");
         }
     }
 }

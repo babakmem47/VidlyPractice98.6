@@ -14,12 +14,19 @@
     }
 }
 
+<button class="btn btn-primary">Add New Customer</button>
+<br/>
+<br/>
+
 <table class="table table-hover table-bordered table-striped" width="100%">
 
     <thead>
         <tr>
-            <th>Customers</th>
+            <th>Id</th>
+            <th>Customer</th>
             <th>Membership Type</th>
+            <th>Subscribed?</th>
+            <th>Birth Date</th>
         </tr>
     </thead>
     <tbody>
@@ -27,12 +34,24 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(customer.Name, "Detail", "Customer", new { id = customer.Id }, null)
+                    @customer.Id
+                </td>
+                <td>
+                    @Html.ActionLink(customer.Name, "Edit", "Customer", new {id = customer.Id}, null)
                 </td>
                 <td>
                     @customer.MembershipType.Name
                 </td>
-                @*<td>@customer.Name</td>*@
+                <td>
+                    @customer.IsSubscribedToNewsLetter
+                </td>
+                <td>
+                    @if (customer.BirthDate != null)
+                    {
+                        @customer.BirthDate.Value.ToString("yyyy MMMM dd")
+                    }
+                </td>
+
             </tr>
         }
     </tbody>
