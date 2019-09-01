@@ -14,6 +14,8 @@
     }
 }
 
+@Html.ActionLink("Add New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
+<br/>
 <button class="btn btn-primary">Add New Customer</button>
 <br/>
 <br/>
@@ -37,7 +39,7 @@
                     @customer.Id
                 </td>
                 <td>
-                    @Html.ActionLink(customer.Name, "Edit", "Customer", new {id = customer.Id}, null)
+                    @Html.ActionLink(customer.Name, "Edit", "Customers", new {id = customer.Id}, null)
                 </td>
                 <td>
                     @customer.MembershipType.Name
