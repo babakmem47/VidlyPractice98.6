@@ -38,7 +38,7 @@ namespace VidlyPractice.Controllers
             //return View(customer);
         }
 
-        [Route("Customer/Edit/{customerId}")]
+        [Route("Customers/Edit/{customerId}")]
         public ActionResult Edit(int customerId)
         {
             if (customerId == 0)
@@ -71,24 +71,48 @@ namespace VidlyPractice.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Customer customer)
-        {
-            if (customer.Id == 0)                   // customer is new
+        public ActionResult Save(CustomerFormViewModel customerViewModel)  // not using customer because of data annotation in ViewModel  [Required], messages, ...
+        {                                                                   // I dont want to pollute Customer.cs with annotations
+            if (!ModelState.IsValid)
             {
+                var viewModel = new CustomerFormViewModel()
+                {
+                    Id = customerViewModel.Id,
+                    Name = customerViewModel.Name,
+                    IsSubscribedToNewsLetter = customerViewModel.IsSubscribedToNewsLetter,
+                    BirthDate = customerViewModel.BirthDate,
+                    MembershipTypeId = customerViewModel.MembershipTypeId,
+                    MembershipTypes = _context.MembershipType.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+            
+            // if information is ok
+            if (customerViewModel.Id == 0)                   // customer is new
+            {
+                var customer = new Customer()
+                {
+                    Id = customerViewModel.Id,
+                    Name = customerViewModel.Name,
+                    IsSubscribedToNewsLetter = customerViewModel.IsSubscribedToNewsLetter,
+                    BirthDate = customerViewModel.BirthDate,
+                    MembershipTypeId = customerViewModel.MembershipTypeId,
+                };
                 _context.Customer.Add(customer);                
             }
             else                                    // edit an existing customer
             {
-                var customerInDb = _context.Customer.SingleOrDefault(c => c.Id == customer.Id);
+                var customerInDb = _context.Customer.SingleOrDefault(c => c.Id == customerViewModel.Id);
                 if (customerInDb == null)
                 {
                     return HttpNotFound();
                 }
 
-                customerInDb.Name = customer.Name;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
-                customerInDb.BirthDate = customer.BirthDate;
+                customerInDb.Name = customerViewModel.Name;
+                customerInDb.MembershipTypeId = customerViewModel.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customerViewModel.IsSubscribedToNewsLetter;
+                customerInDb.BirthDate = customerViewModel.BirthDate;
             }
 
             _context.SaveChanges();
