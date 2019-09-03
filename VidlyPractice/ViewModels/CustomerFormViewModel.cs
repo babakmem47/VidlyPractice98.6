@@ -15,13 +15,15 @@ namespace VidlyPractice.ViewModels
 
         public bool IsSubscribedToNewsLetter { get; set; }
 
+        [Min18YearsIfAMember]
         public DateTime? BirthDate { get; set; }
 
         public MembershipType MembershipType { get; set; }
 
         [Display(Name = "The Membership Type")]
         public byte MembershipTypeId { get; set; }
-        
+
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
     }
+
 }
