@@ -71,6 +71,7 @@ namespace VidlyPractice.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CustomerFormViewModel customerViewModel)  // not using customer because of data annotation in ViewModel  [Required], messages, ...
         {                                                                   // I dont want to pollute Customer.cs with annotations
             if (!ModelState.IsValid)
