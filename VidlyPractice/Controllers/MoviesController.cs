@@ -54,7 +54,7 @@ namespace VidlyPractice.Controllers
                 Name = movie.Name,
                 GenreId = movie.GenreId,
                 ReleaseDate = movie.ReleaseDate,
-                DateAdded = movie.DateAdded,
+                //DateAdded = movie.DateAdded,
                 NumberInStock = movie.NumberInStock
             };
 
@@ -69,24 +69,47 @@ namespace VidlyPractice.Controllers
             };
 
             return View("MovieForm", viewModel);
-
         }
 
         [HttpPost]
-        public ActionResult Save(Movie movie)
+        public ActionResult Save(MovieFormViewModel movieFormViewModel)
         {
-            if (movie.Id == 0)                            // new movies
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel()
+                {
+                    Name = movieFormViewModel.Name,
+                    GenreId = movieFormViewModel.GenreId,
+                    ReleaseDate = movieFormViewModel.ReleaseDate,
+                    NumberInStock = movieFormViewModel.NumberInStock,
+                    DateAdded = movieFormViewModel.DateAdded,
+                    Genres = _context.Genre.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+            if (movieFormViewModel.Id == 0) // new movies
+            {
+                var movie = new Movie()
+                {
+                    Name = movieFormViewModel.Name,
+                    GenreId = movieFormViewModel.GenreId,
+                    ReleaseDate = movieFormViewModel.ReleaseDate,
+                    NumberInStock = movieFormViewModel.NumberInStock,
+                    DateAdded = movieFormViewModel.DateAdded
+                };
                 _context.Movie.Add(movie);
+
+            }
             else
             {
-                var movieInDb = _context.Movie.Single(m => m.Id == movie.Id);
+                var movieInDb = _context.Movie.Single(m => m.Id == movieFormViewModel.Id);
                 if (movieInDb == null)
                     return HttpNotFound();
-                movieInDb.Name = movie.Name;
-                movieInDb.GenreId = movie.GenreId;
-                movieInDb.ReleaseDate = movie.ReleaseDate;
-                movieInDb.DateAdded = movie.DateAdded;
-                movieInDb.NumberInStock = movie.NumberInStock;
+                movieInDb.Name = movieFormViewModel.Name;
+                movieInDb.GenreId = movieFormViewModel.GenreId;
+                movieInDb.ReleaseDate = movieFormViewModel.ReleaseDate;
+                movieInDb.NumberInStock = movieFormViewModel.NumberInStock;
             }
 
             _context.SaveChanges();
