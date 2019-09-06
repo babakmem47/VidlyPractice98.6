@@ -136,3 +136,9 @@ E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPra
 E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddGenre.resources
 E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.PopulateGenre.resources
 E:\Projects\GitHub Repository\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.AddReleaseDateDateAddedAndNumberInStockToMovie.resources
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Net.Http.Formatting.dll
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.dll
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.WebHost.dll
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Net.Http.Formatting.xml
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.xml
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.WebHost.xml
