@@ -55,8 +55,8 @@
                 }
             </td>
             <td>
-                <a href="@Url.Action("Edit", "Customers", new { id = customer.Id })"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;&nbsp;
-                <button class="btn-link js-delete" data-customer-id="@customer.Id"><span class="glyphicon glyphicon-remove"></span></button>
+                <a href="@Url.Action("Edit", "Customers", new { id = customer.Id })"><span class="glyphicon glyphicon-edit" title="Edit..."></span></a>&nbsp;&nbsp;&nbsp;
+                <button class="btn-link js-delete" data-customer-id="@customer.Id"><span class="glyphicon glyphicon-remove" title="Remove"></span></button>
             </td>
 
         </tr>
@@ -69,7 +69,9 @@
 {
     <script>
         $(document).ready(function() {
-            $("#customersTable").on("click", ".js-delete", function() {
+            $("#customersTable").DataTable();
+
+            $("#customersTable").on("click", ".js-delete", function () {
                 //var button = this;
                 //console.log(button);                                        // <button class=....>...</button>
                 //console.log(button.getAttribute("data-customer-id"));       // 6
