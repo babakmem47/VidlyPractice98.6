@@ -23,7 +23,10 @@ namespace VidlyPractice.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetCustomers()
         {
-            var customers = _context.Customer.Include(c => c.MembershipType).ToList();
+            var customers = _context.Customer
+                .Where(c => c.Deleted != true)
+                .Include(c => c.MembershipType)
+                .ToList();
 
             var customizedResult = customers.Select(x => new CustomerDto
             {
@@ -111,7 +114,8 @@ namespace VidlyPractice.Controllers.Api
             if (customer == null)
                 return NotFound();
 
-            _context.Customer.Remove(customer);
+            //_context.Customer.Remove(customer);
+            customer.Deleted = true;
             _context.SaveChanges();
             return Ok("customer " + customer.Name + " deleted.");
         }

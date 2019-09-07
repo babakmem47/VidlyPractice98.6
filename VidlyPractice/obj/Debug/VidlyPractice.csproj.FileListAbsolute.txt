@@ -142,3 +142,7 @@ D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.WebHost.dll
 D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Net.Http.Formatting.xml
 D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.xml
 D:\Projects\VidlyPractice98.6\VidlyPractice\bin\System.Web.Http.WebHost.xml
+D:\Projects\VidlyPractice98.6\VidlyPractice\bin\cs\VidlyPractice.resources.dll
+D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.201909070610097_DeletedForCustomer.cs.resources
+D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\cs\VidlyPractice.resources.dll
+D:\Projects\VidlyPractice98.6\VidlyPractice\obj\Debug\VidlyPractice.Migrations.LogicalDeleteForCustomer.resources

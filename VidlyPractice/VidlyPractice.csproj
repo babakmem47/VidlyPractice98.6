@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201908311018170_AddReleaseDateDateAddedAndNumberInStockToMovie.Designer.cs">
       <DependentUpon>201908311018170_AddReleaseDateDateAddedAndNumberInStockToMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909070639417_LogicalDeleteForCustomer.cs" />
+    <Compile Include="Migrations\201909070639417_LogicalDeleteForCustomer.Designer.cs">
+      <DependentUpon>201909070639417_LogicalDeleteForCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -265,6 +269,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -369,6 +374,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908311018170_AddReleaseDateDateAddedAndNumberInStockToMovie.resx">
       <DependentUpon>201908311018170_AddReleaseDateDateAddedAndNumberInStockToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909070610097_DeletedForCustomer.cs.resx" />
+    <EmbeddedResource Include="Migrations\201909070639417_LogicalDeleteForCustomer.resx">
+      <DependentUpon>201909070639417_LogicalDeleteForCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
