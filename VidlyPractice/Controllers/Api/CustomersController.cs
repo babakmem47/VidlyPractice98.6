@@ -30,11 +30,18 @@ namespace VidlyPractice.Controllers.Api
 
             var customizedResult = customers.Select(x => new CustomerDto
             {
+                Id = x.Id,
                 Name = x.Name,
                 BirthDate = x.BirthDate,
                 IsSubscribedToNewsLetter = x.IsSubscribedToNewsLetter,
-                MembershipTypeDtoId = x.MembershipTypeId,
-                Membership = x.MembershipType.Name
+                MembershipTypeDto = new MembershipTypeDto
+                {
+                    Id = x.MembershipType.Id,
+                    Name = x.MembershipType.Name
+                }
+               
+                //MembershipTypeDtoId = x.MembershipTypeId,
+                //Membership = x.MembershipType.Name
             });
 
             return Ok(customizedResult);
@@ -54,8 +61,8 @@ namespace VidlyPractice.Controllers.Api
                 Id = customer.Id,
                 Name = customer.Name,
                 BirthDate = customer.BirthDate,
-                MembershipTypeDtoId = customer.MembershipTypeId,
-                Membership = customer.MembershipType.Name,
+                //MembershipTypeDtoId = customer.MembershipTypeId,
+                //Membership = customer.MembershipType.Name,
                 IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter
             };
             return Ok(customerDto);
@@ -77,7 +84,7 @@ namespace VidlyPractice.Controllers.Api
                 Name = customerDto.Name,
                 BirthDate = customerDto.BirthDate,
                 IsSubscribedToNewsLetter = customerDto.IsSubscribedToNewsLetter,
-                MembershipTypeId = customerDto.MembershipTypeDtoId
+                MembershipTypeId = customerDto.MembershipTypeDto.Id
             };
 
             _context.Customer.Add(newCustomer);
@@ -100,7 +107,7 @@ namespace VidlyPractice.Controllers.Api
             customerInDb.Name = customerDto.Name;
             customerInDb.BirthDate = customerDto.BirthDate;
             customerInDb.IsSubscribedToNewsLetter = customerDto.IsSubscribedToNewsLetter;
-            customerInDb.MembershipTypeId = customerDto.MembershipTypeDtoId;
+            customerInDb.MembershipTypeId = customerDto.MembershipTypeDto.Id;
 
             _context.SaveChanges();
 

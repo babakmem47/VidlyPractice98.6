@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using VidlyPractice.Models;
@@ -23,9 +22,11 @@ namespace VidlyPractice.Controllers
 
         public ActionResult Index()
         {
-            var customers = _context.Customer.Include(c => c.MembershipType).ToList();
+            return View();
 
-            return View(customers);
+            //var customers = _context.Customer.Include(c => c.MembershipType).ToList();
+
+            //return View(customers);
 
             //var customer = new List<Customer>()
             //{
@@ -88,7 +89,7 @@ namespace VidlyPractice.Controllers
 
                 return View("CustomerForm", viewModel);
             }
-            
+
             // if information is ok
             if (customerViewModel.Id == 0)                   // customer is new
             {
@@ -100,7 +101,7 @@ namespace VidlyPractice.Controllers
                     BirthDate = customerViewModel.BirthDate,
                     MembershipTypeId = customerViewModel.MembershipTypeId,
                 };
-                _context.Customer.Add(customer);                
+                _context.Customer.Add(customer);
             }
             else                                    // edit an existing customer
             {

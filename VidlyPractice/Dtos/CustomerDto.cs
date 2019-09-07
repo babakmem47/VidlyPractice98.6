@@ -18,14 +18,15 @@ namespace VidlyPractice.Dtos
         [Required(ErrorMessage = "الزامی")]
         public bool IsSubscribedToNewsLetter { get; set; }
 
+        [DataMember]
         public MembershipTypeDto MembershipTypeDto { get; set; }
 
-        [DataMember]
-        [Range(1,4, ErrorMessage = "بین 1 و چهار باشد")]
-        public byte MembershipTypeDtoId { get; set; }
+        //[DataMember]
+        //[Range(1,4, ErrorMessage = "بین 1 و چهار باشد")]
+        //public byte MembershipTypeDtoId { get; set; }
 
-        [DataMember]
-        public string Membership { get; set; }
+        //[DataMember]
+        //public string Membership { get; set; }
 
         [DataMember]
         public DateTime? BirthDate { get; set; }

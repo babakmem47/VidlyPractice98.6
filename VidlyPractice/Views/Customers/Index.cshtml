@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VidlyPractice.Models.Customer>
+﻿@*@model IEnumerable<VidlyPractice.Models.Customer>*@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,62 +6,66 @@
 
 <h2>Customers</h2>
 <br />
-@{
+
+@*@{
     if (!Model.Any())
     {
         <text>We dont have any customers</text>
         return;
     }
-}
+}*@
 
 @Html.ActionLink("Add New Customer", "New", "Customers", null, new { @class = "btn btn-primary" })
 <br/>
-<button class="btn btn-primary">Add New Customer</button>
-<br/>
+@*<button class="btn btn-primary">Add New Customer</button>
+<br/>*@
 <br/>
 
 <table id="customersTable" class="table table-hover table-bordered table-striped" width="100%">
 
     <thead>
-    <tr>
-        <th>Id</th>
-        <th>Customer</th>
-        <th>Membership Type</th>
-        <th>Subscribed?</th>
-        <th>Birth Date</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var customer in Model)
-    {
         <tr>
-            <td>
-                @customer.Id
-            </td>
-            <td>
-                @Html.ActionLink(customer.Name, "Edit", "Customers", new {id = customer.Id}, null)
-            </td>
-            <td>
-                @customer.MembershipType.Name
-            </td>
-            <td>
-                @customer.IsSubscribedToNewsLetter
-            </td>
-            <td>
-                @if (customer.BirthDate != null)
-                {
-                    @customer.BirthDate.Value.ToString("yyyy MMMM dd")
-                }
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", "Customers", new { id = customer.Id })"><span class="glyphicon glyphicon-edit" title="Edit..."></span></a>&nbsp;&nbsp;&nbsp;
-                <button class="btn-link js-delete" data-customer-id="@customer.Id"><span class="glyphicon glyphicon-remove" title="Remove"></span></button>
-            </td>
-
+            <th>Id</th>
+            <th>Customer</th>
+            <th>Membership Type</th>
+            <th>Subscribed?</th>
+            <th>Birth Date</th>
+            <th></th>
         </tr>
-    }
-    </tbody>
+    </thead>
+    
+
+    @*<tbody>
+
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>
+                    @customer.Id
+                </td>
+                <td>
+                    @Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)
+                </td>
+                <td>
+                    @customer.MembershipType.Name
+                </td>
+                <td>
+                    @customer.IsSubscribedToNewsLetter
+                </td>
+                <td>
+                    @if (customer.BirthDate != null)
+                    {
+                        @customer.BirthDate.Value.ToString("yyyy MMMM dd")
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Customers", new {id = customer.Id})"><span class="glyphicon glyphicon-edit" title="Edit..."></span></a>&nbsp;&nbsp;&nbsp;
+                    <button class="btn-link js-delete" data-customer-id="@customer.Id"><span class="glyphicon glyphicon-remove" title="Remove"></span></button>
+                </td>
+
+            </tr>
+        }
+    </tbody>*@
 
 </table>
 
@@ -69,7 +73,51 @@
 {
     <script>
         $(document).ready(function() {
-            $("#customersTable").DataTable();
+            $("#customersTable").DataTable({
+                ajax: {
+                    url: "/api/customers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "id" 
+                    },
+                    {
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return "<a href='/Customers/Edit/" + customer.id + "'>" + customer.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "membershipTypeDto.name"
+                    },
+                    {
+                        data: "isSubscribedToNewsLetter",
+                        render: function(data) {
+                            if (data)
+                                return "Yes";
+                            else
+                                return "No";
+                        }
+                    },
+                    {
+                        data: "birthDate",
+                        render: function(data) {
+                            return moment(data).format("MMM Do YYYY");
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<a href='/Customers/Edit/" +
+                                data +
+                                "'><span class='glyphicon glyphicon-edit' title='Edit...'></span></a>&nbsp;&nbsp;&nbsp;" + 
+                                "<button class='btn-link js-delete' data-customer-id='" + data +
+                                "'><span class='glyphicon glyphicon-remove' title='Remove'></span></a>";
+                        }
+                    }
+                ]
+            });
 
             $("#customersTable").on("click", ".js-delete", function () {
                 //var button = this;
@@ -98,6 +146,7 @@
                                 success: function () {
                                     console.log("success");
                                     button.parents("tr").remove();
+
                                 }
                             });
                         }
