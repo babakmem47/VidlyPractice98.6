@@ -76,17 +76,8 @@ namespace VidlyPractice.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MovieFormViewModel()
-                {
-                    Name = movieFormViewModel.Name,
-                    GenreId = movieFormViewModel.GenreId,
-                    ReleaseDate = movieFormViewModel.ReleaseDate,
-                    NumberInStock = movieFormViewModel.NumberInStock,
-                    DateAdded = movieFormViewModel.DateAdded,
-                    Genres = _context.Genre.ToList()
-                };
-
-                return View("MovieForm", viewModel);
+                movieFormViewModel.Genres = _context.Genre.ToList();
+                return View("MovieForm", movieFormViewModel);
             }
             if (movieFormViewModel.Id == 0) // new movies
             {
